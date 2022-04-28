@@ -10,7 +10,7 @@ const addContact = async (req, res, next) => {
       throw new createError(400, error.message);
     }
     const { name, email, phone } = req.body;
-    const result = await contacts.add(name, email, phone);
+    const result = await contacts.addContact(name, email, phone);
     res.status(201).json(result);
   } catch (error) {
     next(error);
