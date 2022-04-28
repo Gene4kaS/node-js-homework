@@ -2,7 +2,8 @@ const Joi = require("joi");
 
 const contactSchema = Joi.object({
   name: Joi.string().required(),
-  price: Joi.number().min(0.01).required(),
+  email: Joi.string().required(),
+  phone: Joi.string().required(),
 });
 
 module.exports = contactSchema;
