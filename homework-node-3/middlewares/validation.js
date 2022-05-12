@@ -2,7 +2,8 @@ const validation = (schema) => {
   return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      throw createError(400, "Missing required name field");
+      error.status = 400;
+      next(error);
     }
     next();
   };
