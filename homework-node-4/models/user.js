@@ -26,11 +26,13 @@ const userSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
+userSchema.methods.setPassword = function (password) {
+  this.password = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+};
+
 const joiRegisterSchema = Joi.object({
   password: Joi.string().min(6).required(),
   email: Joi.string().required(),
-  subscription: Joi.string().required(),
-  token: Joi.string().required(),
 });
 
 const joiLoginSchema = Joi.object({
