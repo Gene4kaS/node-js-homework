@@ -13,9 +13,6 @@ const register = async (req, res) => {
   }
   const avatarURL = gravatar.url(email);
 
-  //   const newUser = new User({ email });
-  //   newUser.setPassword(password);
-  //   newUser.save();
   const verificationToken = nanoid();
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   const result = await User.create({
@@ -28,14 +25,7 @@ const register = async (req, res) => {
   const mail = {
     to: email,
     subject: "Подверждение email",
-    html: (
-      <a
-        target="_blank"
-        href="http://localhost:3000/api/users/verify/${verificationToken}"
-      >
-        Подтвердить email
-      </a>
-    ),
+    html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Подтвердить email</a>`,
   };
 
   await sendEmail(mail);
